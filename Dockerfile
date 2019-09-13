@@ -6,9 +6,12 @@ ENV DEBIAN_FRONTEND "noninteractive"
 RUN apt update
 
 RUN apt install -y \
-    # i3status \
-    # i3-wm \
-    bspwm \
+    i3status \
+    i3-wm \
+    i3lock \
+    i3 \
+    compton \
+    # bspwm \
     git \
     net-tools \
     python3 \
@@ -37,9 +40,9 @@ EXPOSE 8083
 RUN useradd -m user
 WORKDIR /home/user
 
-ENV SHELL=/bin/bash
-RUN mkdir -p /home/user/.config/bspwm
-COPY bspwmrc /home/user/.config/bspwm/
-COPY sxhkdrc /home/user/.config/bspwm/
+# ENV SHELL=/bin/bash
+# RUN mkdir -p /home/user/.config/bspwm
+# COPY bspwmrc /home/user/.config/bspwm/
+# COPY sxhkdrc /home/user/.config/bspwm/
 
 CMD ["/usr/bin/supervisord"]
