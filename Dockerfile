@@ -5,12 +5,7 @@ ENV DEBIAN_FRONTEND "noninteractive"
 
 RUN apt update
 
-RUN apt install -y \
-    i3status \
-    i3-wm \
-    i3lock \
-    i3 \
-    compton \
+RUN apt install -y --no-install-recommends \
     # bspwm \
     git \
     net-tools \
@@ -22,14 +17,39 @@ RUN apt install -y \
     xorg \
     xserver-xorg
 
-RUN apt install -y \
-    xvfb
+RUN apt install -y --no-install-recommends \
+    xvfb \
+    suckless-tools \
+    i3status \
+    i3-wm \
+    i3lock \
+    i3 \
+    dunst
+
+RUN apt install -y --no-install-recommends \
+    compton \
+    hsetroot \
+    rxvt-unicode \
+    xsel \
+    rofi \
+    fonts-noto \
+    fonts-mplus \
+    xsettingsd \
+    lxappearance \
+    scrot \
+    viewnior
+
+RUN apt install -y --no-install-recommends \
+    firefox
 
 # noVNC setup
 WORKDIR /usr/share/
 RUN git clone https://github.com/kanaka/noVNC.git
 WORKDIR /usr/share/noVNC/utils/
 RUN git clone https://github.com/kanaka/websockify
+WORKDIR /root/
+RUN git clone https://github.com/addy-dclxvi/i3-starterpack.git \
+    && cp -a i3-starterpack/. ~
 
 RUN export DISPLAY=:0.0
 
